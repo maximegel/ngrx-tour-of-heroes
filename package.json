@@ -8,15 +8,18 @@
     "format:write": "nx format:write",
     "format:check": "prettier **/*.{js,jsx,ts,tsx,md,html,css}",
     "lint": "ng lint && stylelint **/*.{css,scss}",
+    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
     "ng": "ng"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "10.2.4",
+    "@angular/cdk": "10.2.7",
     "@angular/common": "10.2.4",
     "@angular/compiler": "10.2.4",
     "@angular/core": "10.2.4",
     "@angular/forms": "10.2.4",
+    "@angular/material": "10.2.7",
     "@angular/platform-browser": "10.2.4",
     "@angular/platform-browser-dynamic": "10.2.4",
     "@angular/router": "10.2.4",

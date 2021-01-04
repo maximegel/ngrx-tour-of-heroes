@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+// # Custom theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+
+// Include the common styles for Angular Material.
+@include mat-core();
+
+// Create the theme object.
+// A theme consists of configurations for individual theming systems such as "color" or "typography".
+$toh-theme: mat-light-theme(
+  (
+    color: (
+      primary: mat-palette($mat-indigo),
+      accent: mat-palette($mat-pink, A200, A100, A400),
+      warn: mat-palette($mat-red),
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in the app.
+@include mat-core-theme($toh-theme);
+@include mat-button-theme($toh-theme);
+
+// # Other global styles
+// Add every other styles that you want to share accross you application.
+
+:root {
+  font-size: 16px;
+}
