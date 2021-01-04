@@ -13,6 +13,7 @@
     ".stylelintrc": "json"
   },
   "files.trimTrailingWhitespace": true,
+  "css.validate": false,
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "javascript.validate.enable": false

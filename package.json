@@ -8,8 +8,8 @@
     "format:write": "nx format:write",
     "format:check": "prettier **/*.{js,jsx,ts,tsx,md,html,css}",
     "lint": "ng lint && stylelint **/*.{css,scss}",
-    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
-    "ng": "ng"
+    "ng": "ng",
+    "build:prod": "NODE_ENV=production ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -27,11 +27,13 @@
     "@ngrx/entity": "10.1.2",
     "@ngrx/router-store": "10.1.2",
     "@ngrx/store": "10.1.2",
+    "postcss-nested": "^5.0.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
+    "@angular-builders/custom-webpack": "10.0.1",
     "@angular-devkit/build-angular": "0.1000.5",
     "@angular/cli": "10.2.1",
     "@angular/compiler-cli": "10.2.4",
@@ -41,11 +43,13 @@
     "@commitlint/config-conventional": "^11.0.0",
     "@ngrx/store-devtools": "10.1.2",
     "@types/node": "^12.11.1",
+    "autoprefixer": "^10.1.0",
     "codelyzer": "^6.0.0",
     "commitizen": "^4.2.2",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^4.3.6",
     "lint-staged": "^10.5.3",
+    "postcss": "^8.2.2",
     "prettier": "2.2.1",
     "rxjs-tslint-rules": "^4.34.7",
     "stylelint": "~13.8.0",
@@ -54,6 +58,7 @@
     "stylelint-config-recommended-scss": "^4.2.0",
     "stylelint-prettier": "~1.1.2",
     "stylelint-scss": "~3.18.0",
+    "tailwindcss": "^2.0.2",
     "tslint": "~6.1.0",
     "tslint-config-prettier": "~1.18.0",
     "tslint-plugin-prettier": "~2.3.0",
