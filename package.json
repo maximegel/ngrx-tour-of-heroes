@@ -1,0 +1,49 @@
+{
+  "name": "ngrx-tour-of-heroes",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "ng serve",
+    "build": "ng build",
+    "lint": "ng lint",
+    "ng": "ng"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "~11.0.5",
+    "@angular/common": "~11.0.5",
+    "@angular/compiler": "~11.0.5",
+    "@angular/core": "~11.0.5",
+    "@angular/forms": "~11.0.5",
+    "@angular/platform-browser": "~11.0.5",
+    "@angular/platform-browser-dynamic": "~11.0.5",
+    "@angular/router": "~11.0.5",
+    "rxjs": "~6.6.0",
+    "tslib": "^2.0.0",
+    "zone.js": "~0.10.2"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.1100.5",
+    "@angular/cli": "~11.0.5",
+    "@angular/compiler-cli": "~11.0.5",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@types/node": "^12.11.1",
+    "codelyzer": "^6.0.0",
+    "commitizen": "^4.2.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.1.7",
+    "prettier": "2.0.5",
+    "rxjs-tslint-rules": "^4.28.3",
+    "stylelint": "~11.0.0",
+    "stylelint-config-prettier": "~8.0.1",
+    "stylelint-config-rational-order": "~0.1.2",
+    "stylelint-config-recommended-scss": "^4.2.0",
+    "stylelint-prettier": "~1.1.2",
+    "stylelint-scss": "~3.11.1",
+    "tslint": "~6.1.0",
+    "tslint-config-prettier": "~1.18.0",
+    "tslint-plugin-prettier": "~2.3.0",
+    "typescript": "~4.0.2"
+  }
+}

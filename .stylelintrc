@@ -1,0 +1,31 @@
+{
+  "extends": [
+    "stylelint-prettier/recommended",
+    "stylelint-config-recommended-scss",
+    "stylelint-config-rational-order"
+  ],
+  "rules": {
+    "no-empty-source": null,
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": [
+          "ng-deep"
+        ]
+      }
+    ],
+    "selector-type-no-unknown": null,
+    "scss/at-function-pattern": "^_?toh-",
+    "scss/at-mixin-pattern": "^_?toh-",
+    "scss/at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "use"
+        ]
+      }
+    ],
+    "scss/percent-placeholder-pattern": "^_?toh-"
+  },
+  "defaultSeverity": "warning"
+}

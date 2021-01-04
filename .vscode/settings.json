@@ -1,0 +1,19 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.organizeImports": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "files.associations": {
+    ".czrc": "json",
+    ".commitlintrc": "json",
+    ".huskyrc": "json",
+    ".lintstagedrc": "json",
+    ".stylelintrc": "json"
+  },
+  "files.trimTrailingWhitespace": true,
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.validate.enable": false
+}

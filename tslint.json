@@ -1,0 +1,99 @@
+{
+  "extends": ["tslint:recommended", "tslint-plugin-prettier", "tslint-config-prettier", "rxjs-tslint-rules"],
+  "rulesDirectory": ["codelyzer"],
+  "rules": {
+    "align": {
+      "options": ["parameters", "statements"]
+    },
+    "array-type": false,
+    "arrow-return-shorthand": true,
+    "deprecation": true,
+    "import-blacklist": [true, "rxjs/Rx"],
+    "import-spacing": true,
+    "indent": {
+      "options": ["spaces"]
+    },
+    "max-classes-per-file": false,
+    "member-ordering": [
+      true,
+      {
+        "order": ["static-field", "instance-field", "static-method", "instance-method"]
+      }
+    ],
+    "no-console": [true, "debug", "info", "time", "timeEnd", "trace"],
+    "no-empty": false,
+    "no-inferrable-types": [true, "ignore-params"],
+    "no-non-null-assertion": true,
+    "no-redundant-jsdoc": true,
+    "no-switch-case-fall-through": true,
+    "no-var-requires": false,
+    "object-literal-key-quotes": [true, "as-needed"],
+    "typedef": [true, "call-signature"],
+    "variable-name": {
+      "options": ["ban-keywords", "check-format", "allow-pascal-case"]
+    },
+    "component-class-suffix": true,
+    "contextual-lifecycle": true,
+    "directive-class-suffix": true,
+    "no-conflicting-lifecycle": true,
+    "no-host-metadata-property": true,
+    "no-input-rename": true,
+    "no-inputs-metadata-property": true,
+    "no-output-native": true,
+    "no-output-on-prefix": true,
+    "no-output-rename": true,
+    "no-outputs-metadata-property": true,
+    "template-banana-in-box": true,
+    "template-no-negated-async": true,
+    "use-lifecycle-interface": true,
+    "use-pipe-transform-interface": true,
+    "directive-selector": [true, "attribute", "toh", "camelCase"],
+    "component-selector": [true, "element", "toh", "kebab-case"],
+    "prettier": true,
+    "rxjs-finnish": {
+      "options": [
+        {
+          "functions": false,
+          "methods": false,
+          "parameters": false,
+          "properties": true,
+          "variables": true
+        }
+      ],
+      "severity": "error"
+    },
+    "rxjs-no-compat": true,
+    "rxjs-no-internal": true,
+    "rxjs-no-unsafe-takeuntil": {
+      "options": [
+        {
+          "allow": [
+            "count",
+            "defaultIfEmpty",
+            "endWith",
+            "every",
+            "finalize",
+            "finally",
+            "isEmpty",
+            "last",
+            "max",
+            "min",
+            "publish",
+            "publishBehavior",
+            "publishLast",
+            "publishReplay",
+            "reduce",
+            "share",
+            "shareReplay",
+            "skipLast",
+            "takeLast",
+            "throwIfEmpty",
+            "toArray"
+          ]
+        }
+      ],
+      "severity": "error"
+    },
+    "rxjs-prefer-angular-takeuntil": true
+  }
+}
