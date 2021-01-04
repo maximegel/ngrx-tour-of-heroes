@@ -8,9 +8,18 @@
       "always",
       [
         "*",
+        "browserslist",
+        "commitlint",
+        "editorconfig",
+        "gitignore",
+        "gitattributes",
+        "husky",
+        "lintstaged",
+        "ng",
+        "prettier",
         "readme",
-        "release",
-        "vscode"
+        "stylelint",
+        "tslint"
       ]
     ]
   }
