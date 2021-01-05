@@ -3,14 +3,15 @@ const colors = require('tailwindcss/colors');
 module.exports = {
   purge: [],
   presets: [],
+  important: true,
   darkMode: false,
   theme: {
+    // Use breakpoints defined by [Google's Material Design specification](https://material.io/design/layout/responsive-layout-grid.html#breakpoints).
     screens: {
-      sm: '640px',
-      md: '768px',
-      lg: '1024px',
-      xl: '1280px',
-      '2xl': '1536px',
+      sm: '600px',
+      md: '1024px',
+      lg: '1440px',
+      xl: '1920px',
     },
     colors: {
       transparent: 'transparent',

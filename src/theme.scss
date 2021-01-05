@@ -21,3 +21,7 @@ $toh-theme: mat-light-theme(
 // Include theme styles for core and each component used in the app.
 @include mat-core-theme($toh-theme);
 @include mat-button-theme($toh-theme);
+@include mat-list-theme($toh-theme);
+@include mat-progress-bar-theme($toh-theme);
+@include mat-sidenav-theme($toh-theme);
+@include mat-toolbar-theme($toh-theme);

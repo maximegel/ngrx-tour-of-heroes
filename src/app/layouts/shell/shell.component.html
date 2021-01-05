@@ -1,0 +1,31 @@
+<div *ngIf="breakpoints$ | async as breakpoints" class="flex flex-col h-full">
+  <div class="flex flex-col">
+    <mat-toolbar color="primary" class="px-1">
+      <button mat-icon-button (click)="nav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="hidden text-xl mx-2 sm:block">Tour of Heroes</span>
+    </mat-toolbar>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate" color="accent"></mat-progress-bar>
+  </div>
+  <mat-sidenav-container class="h-full">
+    <mat-sidenav
+      #nav
+      [mode]="breakpoints['xs'] ? 'over' : 'side'"
+      [opened]="!breakpoints['xs']"
+      [fixedInViewport]="breakpoints['xs']"
+      style="min-width: 275px"
+    >
+      <mat-toolbar color="primary" class="sm:hidden">
+        <span class="text-xl">Tour of Heroes</span>
+      </mat-toolbar>
+      <mat-action-list class="pt-0">
+        <button mat-list-item routerLink="/dashboard">Dashboard</button>
+        <button mat-list-item routerLink="/heroes">Heroes</button>
+      </mat-action-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <ng-content></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

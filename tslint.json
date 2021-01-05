@@ -56,7 +56,7 @@
     "no-var-keyword": true,
     "no-var-requires": false,
     "object-literal-key-quotes": [true, "as-needed"],
-    "object-literal-sort-keys": true,
+    "object-literal-sort-keys": false,
     "prefer-const": true,
     "radix": true,
     "triple-equals": [true, "allow-null-check"],
@@ -65,9 +65,11 @@
     "variable-name": {
       "options": ["ban-keywords", "check-format", "allow-pascal-case"]
     },
-    "component-class-suffix": true,
+    "component-class-suffix": [true, "Component", "Container"],
+    "component-selector": [true, "element", "toh", "kebab-case"],
     "contextual-lifecycle": true,
     "directive-class-suffix": true,
+    "directive-selector": false,
     "no-conflicting-lifecycle": true,
     "no-host-metadata-property": true,
     "no-input-rename": true,
@@ -76,12 +78,11 @@
     "no-output-on-prefix": true,
     "no-output-rename": true,
     "no-outputs-metadata-property": true,
+    "max-classes-per-file": false,
     "template-banana-in-box": true,
     "template-no-negated-async": true,
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true,
-    "directive-selector": [true, "attribute", "toh", "camelCase"],
-    "component-selector": [true, "element", "toh", "kebab-case"],
     "prettier": true,
     "rxjs-finnish": {
       "options": [
