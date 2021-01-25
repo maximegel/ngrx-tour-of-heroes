@@ -4,28 +4,25 @@
       <button mat-icon-button (click)="nav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span class="hidden text-xl mx-2 sm:block">Tour of Heroes</span>
+      <span class="hidden text-xl mx-2 md:block">Tour of Heroes</span>
     </mat-toolbar>
     <mat-progress-bar *ngIf="loading" mode="indeterminate" color="accent"></mat-progress-bar>
   </div>
   <mat-sidenav-container class="h-full">
     <mat-sidenav
       #nav
-      [mode]="breakpoints['xs'] ? 'over' : 'side'"
-      [opened]="!breakpoints['xs']"
-      [fixedInViewport]="breakpoints['xs']"
+      [mode]="breakpoints['sm'] ? 'over' : 'side'"
+      [opened]="!breakpoints['sm']"
+      [fixedInViewport]="breakpoints['sm']"
       style="min-width: 275px"
     >
-      <mat-toolbar color="primary" class="sm:hidden">
+      <mat-toolbar color="primary" class="md:hidden">
         <span class="text-xl">Tour of Heroes</span>
       </mat-toolbar>
-      <mat-action-list class="pt-0">
-        <button mat-list-item routerLink="/dashboard">Dashboard</button>
-        <button mat-list-item routerLink="/heroes">Heroes</button>
-      </mat-action-list>
+      <ng-content select="toh-shell-nav"></ng-content>
     </mat-sidenav>
     <mat-sidenav-content>
-      <ng-content></ng-content>
+      <ng-content select="toh-shell-content"></ng-content>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

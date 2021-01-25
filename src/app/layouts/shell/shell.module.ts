@@ -7,10 +7,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { ShellComponent } from './shell.component';
+import { ShellComponent, ShellContentDirective, ShellNavDirective } from './shell.component';
 
 @NgModule({
-  declarations: [ShellComponent],
+  declarations: [ShellComponent, ShellContentDirective, ShellNavDirective],
   imports: [
     CommonModule,
     RouterModule,
@@ -21,6 +21,6 @@ import { ShellComponent } from './shell.component';
     MatSidenavModule,
     MatToolbarModule,
   ],
-  exports: [ShellComponent],
+  exports: [ShellComponent, ShellContentDirective, ShellNavDirective],
 })
 export class ShellModule {}

@@ -2,6 +2,7 @@
 // For more information: https://material.angular.io/guide/theming
 
 @import '@angular/material/theming';
+@import './theme/colors';
 
 // Include the common styles for Angular Material.
 @include mat-core();
@@ -11,8 +12,8 @@
 $toh-theme: mat-light-theme(
   (
     color: (
-      primary: mat-palette($mat-indigo),
-      accent: mat-palette($mat-pink, A200, A100, A400),
+      primary: mat-palette($toh-red),
+      accent: mat-palette($toh-gold),
       warn: mat-palette($mat-red),
     ),
   )
@@ -21,7 +22,11 @@ $toh-theme: mat-light-theme(
 // Include theme styles for core and each component used in the app.
 @include mat-core-theme($toh-theme);
 @include mat-button-theme($toh-theme);
+@include mat-card-theme($toh-theme);
 @include mat-list-theme($toh-theme);
 @include mat-progress-bar-theme($toh-theme);
+@include mat-progress-spinner-theme($toh-theme);
 @include mat-sidenav-theme($toh-theme);
+@include mat-table-theme($toh-theme);
+@include mat-tabs-theme($toh-theme);
 @include mat-toolbar-theme($toh-theme);

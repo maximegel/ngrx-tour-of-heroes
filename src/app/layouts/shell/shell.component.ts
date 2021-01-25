@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Directive, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -10,12 +10,21 @@ import { map } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShellComponent {
-  breakpoints$: Observable<Record<'xs', boolean>>;
-  @Input() loading = false;
+  breakpoints$: Observable<Record<'sm', boolean>>;
+  @Input() loading: boolean | null = false;
 
   constructor(media: BreakpointObserver) {
-    this.breakpoints$ = media
-      .observe([Breakpoints.XSmall])
-      .pipe(map(res => ({ xs: res.breakpoints[Breakpoints.XSmall] })));
+    this.breakpoints$ = media.observe([Breakpoints.XSmall, Breakpoints.Small]).pipe(
+      map(res => ({
+        xs: res.breakpoints[Breakpoints.XSmall],
+        sm: res.breakpoints[Breakpoints.Small] || res.breakpoints[Breakpoints.XSmall],
+      })),
+    );
   }
 }
+
+@Directive({ selector: 'toh-shell-nav' })
+export class ShellNavDirective {}
+
+@Directive({ selector: 'toh-shell-content' })
+export class ShellContentDirective {}

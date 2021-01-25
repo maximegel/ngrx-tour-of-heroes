@@ -1,3 +1,11 @@
-<toh-shell>
-  <router-outlet></router-outlet>
+<toh-shell [loading]="loading$ | async">
+  <toh-shell-nav>
+    <mat-nav-list class="pt-0">
+      <a mat-list-item [routerLink]="urls?.dashboard()" routerLinkActive="bg-black bg-opacity-5">Dashboard</a>
+      <a mat-list-item [routerLink]="urls?.heroes()" routerLinkActive="bg-black bg-opacity-5">Heroes</a>
+    </mat-nav-list>
+  </toh-shell-nav>
+  <toh-shell-content>
+    <router-outlet></router-outlet>
+  </toh-shell-content>
 </toh-shell>
