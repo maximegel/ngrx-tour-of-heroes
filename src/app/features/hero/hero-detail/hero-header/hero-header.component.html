@@ -1,0 +1,13 @@
+<div [style.background-image]="'url(' + model?.coverImage + ')'" class="relative h-full sm:bg-center sm:bg-cover">
+  <div
+    [style.background-image]="'url(' + model?.coverImage + ')'"
+    class="h-1/2 px-4 sm:h-full bg-center bg-cover sm:bg-gradient-to-r sm:from-black sm:to-transparent"
+  ></div>
+  <div class="container flex items-center h-1/2 py-4 bg-black sm:absolute sm:h-full sm:inset-0 sm:bg-transparent">
+    <div class="text-white sm:w-1/2">
+      <span class="text-lg font-bold uppercase">{{ model?.alterEgo }}</span>
+      <h1 class="my-3 text-3xl font-bold uppercase">{{ model?.name }}</h1>
+      <p>{{ model?.intro }}</p>
+    </div>
+  </div>
+</div>

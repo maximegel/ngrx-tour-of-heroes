@@ -1,0 +1,9 @@
+<div class="w-full inline-flex flex-col items-center text-center">
+  <div class="relative inline-block">
+    <mat-progress-spinner [value]="(value || 0) * 10" color="primary" diameter="75"></mat-progress-spinner>
+    <div class="absolute inset-0 flex items-center">
+      <span class="w-full text-4xl font-bold">{{ value || 0 }}</span>
+    </div>
+  </div>
+  <span class="mt-4 text-lg font-bold">{{ label | uppercase }}</span>
+</div>

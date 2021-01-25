@@ -1,0 +1,26 @@
+<mat-tab-group class="mat-tab-labels-container" headerPosition="below" mat-align-tabs="center">
+  <mat-tab *ngFor="let item of model || []; index as i" [label]="item?.name || '' | uppercase">
+    <div class="text-white bg-black">
+      <div class="relative flex h-screen sm:h-96">
+        <div class="absolute inset-0 container flex flex-col sm:place-content-center">
+          <div [style.background-image]="'url(' + item?.image + ')'" class="h-1/2 bg-top bg-cover sm:hidden"></div>
+          <div class="container flex items-center py-8 h-1/2">
+            <div class="sm:w-1/2 sm:pr-8">
+              <div>
+                <span class="mr-1 text-3xl font-bold">{{ i + 1 | number: '2.0-0' }}</span>
+                <span class="relative -top-2 border-b-4 text-accent text-lg font-bold">{{
+                  model?.length || 0 | number: '2.0-0'
+                }}</span>
+              </div>
+              <h2 class="text-accent font-bold uppercase">Powers & abilities</h2>
+              <h3 class="mt-4 mb-2 text-3xl font-bold uppercase">{{ item?.name }}</h3>
+              <p>{{ item?.description }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="sm:w-1/2"></div>
+        <div [style.background-image]="'url(' + item?.image + ')'" class="sm:w-1/2 bg-top bg-cover"></div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

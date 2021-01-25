@@ -1,0 +1,16 @@
+<toh-hero-header [model]="header$ | async" class="sm:h-1/2"></toh-hero-header>
+<div class="pb-8">
+  <div class="container my-8 grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-6">
+    <toh-hero-stat label="Durability" [value]="3"></toh-hero-stat>
+    <toh-hero-stat label="Energy" [value]="1"></toh-hero-stat>
+    <toh-hero-stat label="Fighting" [value]="6"></toh-hero-stat>
+    <toh-hero-stat label="Intelligence" [value]="3"></toh-hero-stat>
+    <toh-hero-stat label="Speed" [value]="2"></toh-hero-stat>
+    <toh-hero-stat label="Strength" [value]="3"></toh-hero-stat>
+  </div>
+  <toh-hero-abilities [model]="abilities$ | async"></toh-hero-abilities>
+  <div class="container mt-8">
+    <h2 class="mb-4 text-2xl uppercase">Connections</h2>
+    <toh-hero-connections [model]="connections$ | async"></toh-hero-connections>
+  </div>
+</div>
