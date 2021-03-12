@@ -1,1 +1,14 @@
-<p>hero-edit works!</p>
+<toh-contextual-bar #bar>
+  <button mat-icon-button (click)="bar.close(); onBack()"><mat-icon>close</mat-icon></button>
+  <span class="flex-grow text-xl mx-2">Edit hero</span>
+  <button mat-icon-button (click)="onSave()"><mat-icon>save</mat-icon></button>
+  <button *ngIf="(isNew$ | async) === false" mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="onDelete()">Delete</button>
+  </mat-menu>
+</toh-contextual-bar>
+<div class="container my-4 px-0">
+  <toh-hero-form [value]="hero$ | async" (valueChange)="heroChanges$.next($event)"></toh-hero-form>
+</div>

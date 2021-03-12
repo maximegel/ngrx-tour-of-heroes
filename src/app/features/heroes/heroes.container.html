@@ -1,11 +1,11 @@
-<div class="container py-4">
+<div class="px-4 py-4 md:container">
   <toh-hero-table
     [model]="heroes$ | async"
     (delete)="onDelete($event)"
     (detail)="onDetail($event)"
     (edit)="onEdit($event)"
   ></toh-hero-table>
-  <button mat-fab color="accent" (click)="onAdd()" class="fixed right-0 bottom-0 m-5">
-    <mat-icon>add</mat-icon>
-  </button>
 </div>
+<button mat-fab color="accent" (click)="onAdd()" class="fixed right-0 bottom-0 m-5">
+  <mat-icon>add</mat-icon>
+</button>

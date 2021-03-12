@@ -8,7 +8,7 @@
     "array-type": false,
     "arrow-return-shorthand": true,
     "deprecation": true,
-    "import-blacklist": [true, "rxjs/Rx"],
+    "import-blacklist": [true, "rxjs/Rx", "lodash", ["^lodash\\-es"]],
     "interface-over-type-literal": true,
     "interface-name": [true, "never-prefix"],
     "member-access": false,
@@ -91,7 +91,10 @@
           "methods": false,
           "parameters": false,
           "properties": true,
-          "variables": true
+          "variables": true,
+          "names": {
+            "Changes$": false
+          }
         }
       ],
       "severity": "error"
@@ -128,6 +131,13 @@
       ],
       "severity": "error"
     },
-    "rxjs-prefer-angular-takeuntil": true
+    "rxjs-prefer-angular-takeuntil": {
+      "options": [
+        {
+          "alias": ["take"],
+          "checkDestroy": false
+        }
+      ]
+    }
   }
 }

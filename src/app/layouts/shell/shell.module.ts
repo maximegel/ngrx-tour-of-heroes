@@ -6,20 +6,20 @@ import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterModule } from '@angular/router';
+import { AppBarModule } from './app-bar/app-bar.module';
 import { ShellComponent, ShellContentDirective, ShellNavDirective } from './shell.component';
 
 @NgModule({
   declarations: [ShellComponent, ShellContentDirective, ShellNavDirective],
   imports: [
     CommonModule,
-    RouterModule,
     MatButtonModule,
     MatIconModule,
     MatListModule,
     MatProgressBarModule,
     MatSidenavModule,
     MatToolbarModule,
+    AppBarModule,
   ],
   exports: [ShellComponent, ShellContentDirective, ShellNavDirective],
 })

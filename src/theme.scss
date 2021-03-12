@@ -3,6 +3,7 @@
 
 @import '@angular/material/theming';
 @import './theme/colors';
+@import './theme/components';
 
 // Include the common styles for Angular Material.
 @include mat-core();
@@ -14,7 +15,7 @@ $toh-theme: mat-light-theme(
     color: (
       primary: mat-palette($toh-red),
       accent: mat-palette($toh-gold),
-      warn: mat-palette($mat-red),
+      warn: mat-palette($toh-red),
     ),
   )
 );
@@ -23,10 +24,16 @@ $toh-theme: mat-light-theme(
 @include mat-core-theme($toh-theme);
 @include mat-button-theme($toh-theme);
 @include mat-card-theme($toh-theme);
+@include mat-divider-theme($toh-theme);
+@include mat-icon-theme($toh-theme);
+@include toh-form-field-theme($toh-theme);
+@include mat-input-theme($toh-theme);
 @include mat-list-theme($toh-theme);
+@include mat-menu-theme($toh-theme);
 @include mat-progress-bar-theme($toh-theme);
 @include mat-progress-spinner-theme($toh-theme);
 @include mat-sidenav-theme($toh-theme);
+@include mat-slider-theme($toh-theme);
 @include mat-table-theme($toh-theme);
 @include mat-tabs-theme($toh-theme);
 @include mat-toolbar-theme($toh-theme);

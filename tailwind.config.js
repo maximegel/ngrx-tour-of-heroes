@@ -14,12 +14,13 @@ module.exports = {
       xl: '1920px',
     },
     colors: {
-      primary: '#c02926',
-      accent: '#c6a972',
-      black: '#202020',
-      white: colors.white,
       transparent: 'transparent',
       current: 'currentColor',
+      black: colors.black,
+      white: colors.white,
+      primary: '#c02926',
+      accent: '#c6a972',
+      dark: '#202020',
     },
     spacing: {
       px: '1px',

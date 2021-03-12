@@ -1,16 +1,19 @@
+import uniqueId from 'lodash/uniqueId';
 import { Hero } from './hero.entity';
 
 const captainAmerica: Hero = {
-  id: 1,
+  id: uniqueId(),
   slug: 'captain-america-steve-rogers',
   name: 'Captain America',
   avatar: 'https://terrigen-cdn-dev.marvel.com/content/prod/1x/003cap_ons_crd_03.jpg',
   thumbnail: 'https://terrigen-cdn-dev.marvel.com/content/prod/1x/003cap_ons_crd_03.jpg',
   coverImage: 'https://terrigen-cdn-dev.marvel.com/content/prod/1x/003cap_ons_mas_dsk_02.jpg',
   alterEgo: {
-    name: 'Steve Rogers',
+    displayName: 'Steve Rogers',
+    firstName: 'Steve',
+    lastName: 'Rogers',
   },
-  intro:
+  about:
     'Recipient of the Super-Soldier serum, World War II hero Steve Rogers fights for American ideals as one of the' +
     "world's mightiest heroes and the leader of the Avengers.",
   stats: {
@@ -33,16 +36,18 @@ const captainAmerica: Hero = {
   connections: [],
 };
 const ironMan: Hero = {
-  id: 2,
+  id: uniqueId(),
   slug: 'iron-man-tony-stark',
   name: 'Iron man',
   avatar: 'https://terrigen-cdn-dev.marvel.com/content/prod/1x/002irm_ons_crd_03.jpg',
   thumbnail: 'https://terrigen-cdn-dev.marvel.com/content/prod/1x/002irm_ons_crd_03.jpg',
   coverImage: 'https://terrigen-cdn-dev.marvel.com/content/prod/1x/002irm_ons_mas_dsk_02.jpg',
   alterEgo: {
-    name: 'Tony Stark',
+    displayName: 'Tony Stark',
+    firstName: 'Tony',
+    lastName: 'Stark',
   },
-  intro:
+  about:
     "Genius. Billionaire. Philanthropist. Tony Stark's confidence is only matched by his high-flying abilities as " +
     'the hero called Iron Man.',
   stats: {
@@ -65,13 +70,13 @@ const ironMan: Hero = {
   connections: [],
 };
 const thor: Hero = {
-  id: 3,
+  id: uniqueId(),
   slug: 'thor',
   name: 'Thor',
   avatar: 'https://terrigen-cdn-dev.marvel.com/content/prod/1x/004tho_ons_crd_03.jpg',
   thumbnail: 'https://terrigen-cdn-dev.marvel.com/content/prod/1x/004tho_ons_crd_03.jpg',
   coverImage: 'https://terrigen-cdn-dev.marvel.com/content/prod/1x/004tho_ons_mas_dsk_02_0.jpg',
-  intro:
+  about:
     'The son of Odin uses his mighty abilities as the God of Thunder to protect his home Asgard and planet Earth alike.',
   stats: {
     durability: 6,
@@ -97,4 +102,8 @@ captainAmerica.connections?.push(ironMan, thor);
 ironMan.connections?.push(captainAmerica, thor);
 thor.connections?.push(captainAmerica, ironMan);
 
-export const HEROES: Hero[] = [captainAmerica, ironMan, thor];
+export const HEROES = new Map<string | number, Hero>([
+  [captainAmerica.id, captainAmerica],
+  [ironMan.id, ironMan],
+  [thor.id, thor],
+]);

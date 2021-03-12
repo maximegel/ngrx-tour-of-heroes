@@ -1,6 +1,6 @@
 <mat-tab-group class="mat-tab-labels-container" headerPosition="below" mat-align-tabs="center">
   <mat-tab *ngFor="let item of model || []; index as i" [label]="item?.name || '' | uppercase">
-    <div class="text-white bg-black">
+    <div class="text-white bg-dark">
       <div class="relative flex h-screen sm:h-96">
         <div class="absolute inset-0 container flex flex-col sm:place-content-center">
           <div [style.background-image]="'url(' + item?.image + ')'" class="h-1/2 bg-top bg-cover sm:hidden"></div>

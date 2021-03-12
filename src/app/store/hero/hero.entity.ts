@@ -1,11 +1,11 @@
 export interface Hero {
   readonly abilities?: HeroAbility[];
+  readonly about?: string;
   readonly alterEgo?: HeroAlterEgo;
   readonly avatar: string;
   readonly connections?: HeroConnection[];
   readonly coverImage?: string;
-  readonly id: string | number;
-  readonly intro?: string;
+  readonly id: string;
   readonly name: string;
   readonly slug: string;
   readonly stats?: HeroStats;
@@ -16,12 +16,14 @@ export type HeroPeek = Pick<Hero, 'id' | 'slug' | 'avatar' | 'name' | 'alterEgo'
 
 export interface HeroAbility {
   readonly description: string;
-  readonly image: string;
+  readonly image?: string;
   readonly name: string;
 }
 
 export interface HeroAlterEgo {
-  readonly name: string;
+  readonly displayName: string;
+  readonly firstName: string;
+  readonly lastName: string;
 }
 
 export type HeroConnection = Pick<Hero, 'id' | 'slug' | 'name' | 'thumbnail' | 'alterEgo'>;

@@ -1,0 +1,30 @@
+@mixin toh-form-field-theme($theme) {
+  @include mat-form-field-theme($theme);
+  $accent: mat-color(map-get($theme, 'accent'));
+
+  // Replace primary color with accent color.
+  .mat-form-field {
+    &.mat-focused:not(.mat-form-field-invalid) {
+      .mat-form-field-outline {
+        color: $accent;
+      }
+      .mat-form-field-label {
+        color: $accent;
+      }
+      .mat-input-element {
+        caret-color: $accent;
+      }
+    }
+
+    // Prefix error messages with an error icon.
+    .mat-error {
+      &::before {
+        margin-right: 0.25rem;
+        font-size: 1.25em;
+        font-family: 'Material Icons';
+        vertical-align: -20%;
+        content: 'error';
+      }
+    }
+  }
+}

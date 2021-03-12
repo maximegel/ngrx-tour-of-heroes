@@ -18,10 +18,13 @@
     "module": "es2020",
     "lib": ["es2018", "dom"],
     "paths": {
+      "lodash/*": ["node_modules/@types/lodash-es/*"],
       "~environment": ["src/environments/environment"],
       "~app": ["src/app"],
       "~features/*": ["src/app/features/*"],
+      "~layouts/*": ["src/app/layouts/*"],
       "~shared/*": ["src/app/shared/*"],
+      "~shell": ["src/app/layouts/shell"],
       "~store/*": ["src/app/store/*"]
     }
   },

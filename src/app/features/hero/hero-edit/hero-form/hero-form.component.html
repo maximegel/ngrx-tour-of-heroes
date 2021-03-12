@@ -1,0 +1,194 @@
+<form [formGroup]="form">
+  <div class="md:grid md:grid-cols-3 md:gap-6">
+    <div class="px-4 md:col-span-1">
+      <h3 class="text-lg font-bold uppercase">General</h3>
+      <p class="mt-1">Provide general info about the hero.</p>
+    </div>
+    <div class="mt-5 px-2 md:mt-0 md:col-span-2">
+      <div class="flex">
+        <div class="pt-3"><mat-icon class="m-2 opacity-60">account_circle</mat-icon></div>
+        <div class="flex-grow">
+          <mat-form-field class="w-full">
+            <mat-label>Name</mat-label>
+            <input formControlName="name" matInput type="text" required maxlength="50" />
+            <mat-error *ngIf="form.get('name')?.hasError('required')">Please enter a name.</mat-error>
+            <mat-error *ngIf="form.get('name')?.hasError('minlength')">Please enter at least 2 characters.</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="pt-3"><div class="w-10"></div></div>
+      </div>
+      <div class="flex">
+        <div class="pt-3">
+          <mat-icon class="m-2 opacity-60">description</mat-icon>
+        </div>
+        <div class="flex-grow">
+          <mat-form-field class="w-full">
+            <mat-label>About</mat-label>
+            <textarea formControlName="about" matInput type="text" required maxlength="255"></textarea>
+            <mat-error *ngIf="form.get('name')?.hasError('required')">Please tell something about the hero.</mat-error>
+            <mat-error *ngIf="form.get('about')?.hasError('minlength')">Please enter at least 50 characters.</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="pt-3"><div class="w-10"></div></div>
+      </div>
+    </div>
+  </div>
+  <mat-divider class="my-6"></mat-divider>
+  <div formGroupName="alterEgo" class="md:grid md:grid-cols-3 md:gap-6">
+    <div class="px-4 md:col-span-1">
+      <h3 class="text-lg font-bold uppercase">Alter ego</h3>
+      <p class="mt-1">provide info about the hero real identity.</p>
+    </div>
+    <div class="mt-5 px-2 md:mt-0 md:col-span-2">
+      <div class="flex">
+        <div class="pt-3">
+          <mat-icon class="m-2 opacity-60">supervised_user_circle</mat-icon>
+        </div>
+        <div class="flex-grow">
+          <mat-form-field class="w-full">
+            <mat-label>First name</mat-label>
+            <input formControlName="firstName" matInput type="text" maxlength="50" />
+            <mat-error *ngIf="form.get('firstName')?.hasError('minlength')"
+              >Please enter at least 2 characters.</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="w-full">
+            <mat-label>Last name</mat-label>
+            <input formControlName="lastName" matInput type="text" maxlength="50" />
+            <mat-error *ngIf="form.get('lastName')?.hasError('minlength')"
+              >Please enter at least 2 characters.</mat-error
+            >
+          </mat-form-field>
+        </div>
+        <div class="pt-3"><div class="w-10"></div></div>
+      </div>
+    </div>
+  </div>
+  <mat-divider class="mt-2 mb-6"></mat-divider>
+  <div formGroupName="stats" class="md:grid md:grid-cols-3 md:gap-6">
+    <div class="px-4 md:col-span-1">
+      <h3 class="text-lg font-bold uppercase">Stats</h3>
+      <p class="mt-1">Provide the statistics of the hero.</p>
+    </div>
+    <div class="mt-5 px-2 md:mt-0 md:col-span-2">
+      <div class="flex">
+        <div class="pt-3"><mat-icon class="m-2 opacity-60">tune</mat-icon></div>
+        <div class="flex-grow">
+          <div class="px-3">
+            <label class="relative top-3">Durability</label>
+            <input formControlName="durability" #durabilityInput matInput hidden />
+            <mat-slider
+              [value]="durabilityInput.value"
+              max="7"
+              thumbLabel
+              tickInterval="1"
+              color="primary"
+              (change)="durabilityInput.value = $event.value?.toString() || ''"
+              class="w-full"
+            ></mat-slider>
+          </div>
+          <div class="px-3">
+            <label class="relative top-3">Energy</label>
+            <input formControlName="energy" #energyInput matInput hidden />
+            <mat-slider
+              [value]="energyInput.value"
+              max="7"
+              thumbLabel
+              tickInterval="1"
+              color="primary"
+              (change)="energyInput.value = $event.value?.toString() || ''"
+              class="w-full"
+            ></mat-slider>
+          </div>
+          <div class="px-3">
+            <label class="relative top-3">Fighting</label>
+            <input formControlName="fighting" #fightingInput matInput hidden />
+            <mat-slider
+              [value]="fightingInput.value"
+              max="7"
+              thumbLabel
+              tickInterval="1"
+              color="primary"
+              (change)="fightingInput.value = $event.value?.toString() || ''"
+              class="w-full"
+            ></mat-slider>
+          </div>
+          <div class="px-3">
+            <label class="relative top-3">Intelligence</label>
+            <input formControlName="intelligence" #intelligenceInput matInput hidden />
+            <mat-slider
+              [value]="intelligenceInput.value"
+              max="7"
+              thumbLabel
+              tickInterval="1"
+              color="primary"
+              (change)="intelligenceInput.value = $event.value?.toString() || ''"
+              class="w-full"
+            ></mat-slider>
+          </div>
+          <div class="px-3">
+            <label class="relative top-3">Speed</label>
+            <input formControlName="speed" #speedInput matInput hidden />
+            <mat-slider
+              [value]="speedInput.value"
+              max="7"
+              thumbLabel
+              tickInterval="1"
+              color="primary"
+              (change)="speedInput.value = $event.value?.toString() || ''"
+              class="w-full"
+            ></mat-slider>
+          </div>
+          <div class="px-3">
+            <label class="relative top-3">Strength</label>
+            <input formControlName="strength" #strengthInput matInput hidden />
+            <mat-slider
+              [value]="strengthInput.value"
+              max="7"
+              thumbLabel
+              tickInterval="1"
+              color="primary"
+              (change)="strengthInput.value = $event.value?.toString() || ''"
+              class="w-full"
+            ></mat-slider>
+          </div>
+        </div>
+        <div class="pt-3"><div class="w-10"></div></div>
+      </div>
+    </div>
+  </div>
+  <mat-divider class="mt-2 mb-6"></mat-divider>
+  <div formArrayName="abilities" class="md:grid md:grid-cols-3 md:gap-6">
+    <div class="px-4 md:col-span-1">
+      <h3 class="text-lg font-bold uppercase">Abilities</h3>
+      <p class="mt-1">Provide a list of the hero's abilities.</p>
+    </div>
+    <div class="mt-5 md:mt-0 md:col-span-2">
+      <div *ngFor="let group of abilities.controls; let i = index; let last = last" class="flex px-2">
+        <div class="pt-3"><mat-icon class="m-2 opacity-60">directions_run</mat-icon></div>
+        <div [formGroupName]="i" class="flex-grow">
+          <mat-form-field class="w-full">
+            <mat-label>Ability</mat-label>
+            <input formControlName="name" matInput type="text" required maxlength="50" />
+            <mat-error *ngIf="group.get('name')?.hasError('required')">Please enter an ability name.</mat-error>
+            <mat-error *ngIf="group.get('name')?.hasError('minlength')">Please enter at least 3 characters.</mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-full">
+            <mat-label>Description</mat-label>
+            <textarea formControlName="description" matInput type="text" required maxlength="255"></textarea>
+            <mat-error *ngIf="group.get('name')?.hasError('required')">Please enter an ability description.</mat-error>
+            <mat-error *ngIf="group.get('description')?.hasError('minlength')"
+              >Please enter at least 50 characters.</mat-error
+            >
+          </mat-form-field>
+        </div>
+        <div class="py-3">
+          <button *ngIf="!last; else noIcon" mat-icon-button (click)="onRemoveAbility(i)">
+            <mat-icon class="opacity-60">close</mat-icon>
+          </button>
+          <ng-template #noIcon><div class="w-10"></div></ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

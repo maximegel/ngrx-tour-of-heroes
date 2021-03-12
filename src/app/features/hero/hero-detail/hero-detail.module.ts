@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { HeroAbilitiesModule } from './hero-abilities/hero-abilities.module';
 import { HeroConnectionsModule } from './hero-connections/hero-connections.module';
@@ -12,6 +14,8 @@ import { HeroStatModule } from './hero-stat/hero-stat.module';
   declarations: [HeroDetailContainer],
   imports: [
     CommonModule,
+    MatButtonModule,
+    MatIconModule,
     HeroAbilitiesModule,
     HeroConnectionsModule,
     HeroHeaderModule,

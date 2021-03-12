@@ -1,0 +1,7 @@
+<mat-toolbar color="primary" class="px-1">
+  <ng-template
+    *ngIf="contextualContent$ | async as contextualContent; else defaultContent"
+    [cdkPortalOutlet]="contextualContent"
+  ></ng-template>
+  <ng-template #defaultContent><ng-content></ng-content></ng-template>
+</mat-toolbar>

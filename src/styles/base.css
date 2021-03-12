@@ -1,0 +1,5 @@
+@layer base {
+  label:not(.mat-form-field-label) {
+    @apply text-black opacity-60;
+  }
+}

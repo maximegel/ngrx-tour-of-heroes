@@ -21,7 +21,7 @@ export class HeroesContainer {
       map(heroes =>
         heroes.map(hero => ({
           ...hero,
-          alterEgo: hero?.alterEgo?.name,
+          alterEgo: hero?.alterEgo?.displayName,
         })),
       ),
     );

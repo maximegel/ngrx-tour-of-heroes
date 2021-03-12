@@ -1,11 +1,9 @@
 <div *ngIf="breakpoints$ | async as breakpoints" class="flex flex-col h-full">
   <div class="flex flex-col">
-    <mat-toolbar color="primary" class="px-1">
-      <button mat-icon-button (click)="nav.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span class="hidden text-xl mx-2 md:block">Tour of Heroes</span>
-    </mat-toolbar>
+    <toh-app-bar (contextualOpened)="nav.close()">
+      <button mat-icon-button (click)="nav.toggle()"><mat-icon>menu</mat-icon></button>
+      <span *ngIf="!breakpoints['sm']" class="text-xl mx-2">Tour of Heroes</span>
+    </toh-app-bar>
     <mat-progress-bar *ngIf="loading" mode="indeterminate" color="accent"></mat-progress-bar>
   </div>
   <mat-sidenav-container class="h-full">
@@ -16,7 +14,7 @@
       [fixedInViewport]="breakpoints['sm']"
       style="min-width: 275px"
     >
-      <mat-toolbar color="primary" class="md:hidden">
+      <mat-toolbar *ngIf="breakpoints['sm']" color="primary">
         <span class="text-xl">Tour of Heroes</span>
       </mat-toolbar>
       <ng-content select="toh-shell-nav"></ng-content>
