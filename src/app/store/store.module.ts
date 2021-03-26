@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule as NgRxStoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '~environment';
 import { StoreHeroModule } from './hero/hero.module';
 
 @NgModule({
   imports: [
-    StoreModule.forRoot({}),
+    NgRxStoreModule.forRoot({}),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: true }),
     StoreHeroModule,
+    // TODO: Remove dependency to `environment` by injecting config options in a `forRoot()` method.
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
 })
-export class StoreRootModule {}
+export class StoreModule {}

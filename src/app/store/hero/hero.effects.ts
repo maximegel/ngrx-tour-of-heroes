@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, concatMap, exhaustMap, map, mergeMap, tap } from 'rxjs/operators';
+import { catchError, concatMap, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import {
   create,
   createFailure,
@@ -40,7 +40,7 @@ export class HeroEffects {
   loadMany$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadMany),
-      exhaustMap(() => this.service.list()),
+      switchMap(() => this.service.list()),
       map(payload => loadManySuccess({ payload })),
       catchError(error => of(loadManyFailure({ error }))),
     ),
@@ -48,7 +48,7 @@ export class HeroEffects {
   loadOne$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadOne),
-      exhaustMap(({ payload }) => this.service.find(payload)),
+      switchMap(({ payload }) => this.service.find(payload)),
       map(payload => loadOneSuccess({ payload })),
       catchError(error => of(loadOneFailure({ error }))),
     ),
