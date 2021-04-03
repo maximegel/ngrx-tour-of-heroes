@@ -1,7 +1,9 @@
 <mat-toolbar color="primary" class="px-1">
-  <ng-template
-    *ngIf="contextualContent$ | async as contextualContent; else defaultContent"
-    [cdkPortalOutlet]="contextualContent"
-  ></ng-template>
-  <ng-template #defaultContent><ng-content></ng-content></ng-template>
+  <toh-contextual-bar-container>
+    <toh-contextual-bar-outlet
+      (opened)="contextualOpened?.emit()"
+      (closed)="contextualClosed?.emit()"
+    ></toh-contextual-bar-outlet>
+    <toh-default-bar><ng-content></ng-content></toh-default-bar>
+  </toh-contextual-bar-container>
 </mat-toolbar>

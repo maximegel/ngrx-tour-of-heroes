@@ -3,12 +3,12 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  OnDestroy,
   TemplateRef,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AppBarService, ContextualBarRef } from '~shell';
+import { ContextualBarService } from './contextual-bar.service';
 
 @Component({
   selector: 'toh-contextual-bar',
@@ -16,29 +16,21 @@ import { AppBarService, ContextualBarRef } from '~shell';
   styleUrls: ['./contextual-bar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ContextualBarComponent<D = any> implements AfterViewInit {
+export class ContextualBarComponent implements AfterViewInit, OnDestroy {
   @ViewChild('content') content: TemplateRef<any> | null = null;
-  private contextualBar: ContextualBarRef | null = null;
 
-  constructor(private viewContainerRef: ViewContainerRef, private appBar: AppBarService) {}
+  constructor(private viewContainerRef: ViewContainerRef, private service: ContextualBarService) {}
 
-  afterClosed(): Observable<D> {
-    if (!this.contextualBar) throw new Error("afterClosed can't be invoked before view init.");
-    return this.contextualBar.afterClosed();
-  }
-
-  beforeClosed(): Observable<D> {
-    if (!this.contextualBar) throw new Error("beforeClosed can't be invoked before view init.");
-    return this.contextualBar.beforeClosed();
-  }
-
-  close(data?: D): void {
-    if (!this.contextualBar) throw new Error("close can't be invoked before view init.");
-    this.contextualBar.close(data);
+  close(): void {
+    this.service.close();
   }
 
   ngAfterViewInit(): void {
-    if (!this.content) throw new Error("content can't be null.");
-    this.contextualBar = this.appBar.openContextualBar(new CdkPortal(this.content, this.viewContainerRef));
+    if (!this.content) throw new Error("Content of 'ContextualBarComponent' cannot be empty.");
+    this.service.open(new CdkPortal(this.content, this.viewContainerRef));
+  }
+
+  ngOnDestroy(): void {
+    this.close();
   }
 }
