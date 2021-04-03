@@ -1,10 +1,12 @@
 import { Location } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, map, take, withLatestFrom } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map, switchMapTo, take, tap, withLatestFrom } from 'rxjs/operators';
+import { appUrls } from '~app';
 import { Hero, HeroActions, HeroSelectors, HeroSlice } from '~store/hero';
-import { HeroForm } from './hero-form/hero-form.model';
 
 @Component({
   selector: 'toh-hero-edit',
@@ -12,25 +14,22 @@ import { HeroForm } from './hero-form/hero-form.model';
   styleUrls: ['./hero-edit.container.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeroEditContainer {
-  hero$: Observable<HeroForm>;
-  heroChanges$ = new BehaviorSubject<HeroForm | null>(null);
+export class HeroEditContainer implements OnInit {
+  form = new FormControl();
   isNew$: Observable<boolean>;
 
   private id$: Observable<Hero['id'] | null>;
 
-  constructor(private store: Store<HeroSlice>, private location: Location) {
-    const selected$ = store.select(HeroSelectors.selected);
-    this.hero$ = selected$.pipe(
-      map(hero => ({
-        name: '',
-        about: '',
-        stats: { durability: 3, energy: 3, fighting: 3, intelligence: 3, speed: 3, strength: 3 },
-        ...hero,
-      })),
-    );
-    this.id$ = selected$.pipe(map(hero => hero?.id ?? null));
-    this.isNew$ = this.id$.pipe(map(id => !!id));
+  constructor(private store: Store<HeroSlice>, private router: Router, private location: Location) {
+    this.id$ = store.select(HeroSelectors.selected).pipe(map(hero => hero?.id ?? null));
+    this.isNew$ = this.id$.pipe(map(id => !id));
+  }
+
+  ngOnInit(): void {
+    this.store
+      .select(HeroSelectors.selected)
+      .pipe(take(1))
+      .subscribe({ next: hero => this.form.setValue(hero) });
   }
 
   onBack(): void {
@@ -40,17 +39,19 @@ export class HeroEditContainer {
   onDelete(): void {}
 
   onSave(): void {
-    this.heroChanges$
+    of(this.form.value)
       .pipe(
-        filter(hero => !!hero),
-        withLatestFrom(this.hero$),
-        map(([changes, hero]) => ({ ...hero, ...changes, id: null })),
-        withLatestFrom(this.id$),
-        map(([hero, id]) =>
-          id ? HeroActions.edit({ payload: { ...hero, id } }) : HeroActions.create({ payload: hero }),
+        withLatestFrom(this.isNew$, this.id$),
+        map(([payload, isNew, id]) =>
+          !isNew && id ? HeroActions.edit({ payload: { ...payload, id } }) : HeroActions.create({ payload }),
         ),
+        tap(editOrCreate => this.store.dispatch(editOrCreate)),
+        switchMapTo(this.store.select(HeroSelectors.loaded)),
+        filter(loaded => loaded),
+        switchMapTo(this.store.select(HeroSelectors.selected)),
+        map(hero => hero?.slug),
         take(1),
       )
-      .subscribe(action => this.store.dispatch(action));
+      .subscribe(slug => slug && this.router.navigateByUrl(appUrls.hero.detail(slug)));
   }
 }

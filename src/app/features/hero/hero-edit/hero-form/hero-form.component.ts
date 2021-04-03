@@ -1,18 +1,57 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, forwardRef, OnDestroy, OnInit } from '@angular/core';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  Validator,
+  Validators,
+} from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
-import { map, switchMap, takeUntil } from 'rxjs/operators';
-import { HeroForm } from './hero-form.model';
+import { filter, map, switchMap, takeUntil } from 'rxjs/operators';
+import { HeroForm, HeroFormAbility } from './hero-form.model';
 
 @Component({
   selector: 'toh-hero-form',
   templateUrl: './hero-form.component.html',
   styleUrls: ['./hero-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => HeroFormComponent),
+      multi: true,
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => HeroFormComponent),
+      multi: true,
+    },
+  ],
 })
-export class HeroFormComponent implements OnInit, OnDestroy {
+export class HeroFormComponent implements ControlValueAccessor, Validator, OnInit, OnDestroy {
   form: FormGroup;
-  @Output() valueChange = new EventEmitter<HeroForm>();
+
+  get abilities(): FormArray {
+    return this.form.get('abilities') as FormArray;
+  }
+
+  get value(): HeroForm {
+    return this.form.value;
+  }
+
+  set value(val: HeroForm) {
+    this.form.patchValue(val);
+    this.onChange(this.value);
+    this.onTouched();
+    this.abilities.clear();
+    val.abilities?.forEach(ability => this.addAbility(ability));
+    this.addAbility();
+  }
 
   private destroy$ = new Subject<any>();
   private lastAbilityTouched$: Observable<void>;
@@ -37,18 +76,11 @@ export class HeroFormComponent implements OnInit, OnDestroy {
     });
     this.lastAbilityTouched$ = this.abilities.valueChanges.pipe(
       map(() => this.abilities.at(this.abilities.length - 1)),
-      switchMap(group => group.statusChanges.pipe(map(() => group.touched))),
+      filter(last => !!last),
+      switchMap(last => last.statusChanges.pipe(map(() => last))),
+      filter(last => last.dirty),
       map(() => {}),
     );
-  }
-
-  get abilities(): FormArray {
-    return this.form.get('abilities') as FormArray;
-  }
-
-  @Input()
-  set value(val: HeroForm | null) {
-    this.form.patchValue(val ?? {});
   }
 
   ngOnDestroy(): void {
@@ -57,21 +89,63 @@ export class HeroFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.addAbility();
-    this.lastAbilityTouched$.pipe(takeUntil(this.destroy$)).subscribe(() => this.addAbility());
-    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(value => this.valueChange.emit(value));
+    this.form.valueChanges.pipe(takeUntil(this.destroy$)).subscribe({
+      next: () => {
+        this.onChange(this.value);
+        this.onTouched();
+      },
+    });
+    this.lastAbilityTouched$.pipe(takeUntil(this.destroy$)).subscribe({ next: () => this.addAbility() });
   }
 
   onRemoveAbility(index: number): void {
     this.abilities.removeAt(index);
   }
 
-  private addAbility(): void {
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  validate(_: AbstractControl): ValidationErrors | null {
+    return this.form.valid ? null : { hero: { valid: false } };
+  }
+
+  writeValue(obj: any): void {
+    if (obj) {
+      this.value = {
+        name: obj.name ?? null,
+        about: obj.about ?? null,
+        alterEgo: { firstName: obj.alterEgo?.firstName ?? null, lastName: obj.alterEgo?.lastName ?? null },
+        stats: {
+          durability: obj.stats?.durability ?? 0,
+          energy: obj.stats?.energy ?? 0,
+          fighting: obj.stats?.fighting ?? 0,
+          intelligence: obj.stats?.intelligence ?? 0,
+          speed: obj.stats?.speed ?? 0,
+          strength: obj.stats?.strength ?? 0,
+        },
+        abilities:
+          obj.abilities?.map((a: HeroFormAbility) => ({
+            name: a?.name ?? null,
+            description: a?.description ?? null,
+          })) ?? [],
+      };
+    } else this.form.reset();
+  }
+
+  private addAbility(value?: HeroFormAbility): void {
     this.abilities.push(
       this.builder.group({
-        name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-        description: [null, [Validators.required, Validators.minLength(50), Validators.maxLength(255)]],
+        name: [value?.name ?? null, [Validators.minLength(3), Validators.maxLength(50)]],
+        description: [value?.description ?? null, [Validators.minLength(50), Validators.maxLength(255)]],
       }),
     );
   }
+
+  private onChange = (value: HeroForm) => {};
+  private onTouched = () => {};
 }

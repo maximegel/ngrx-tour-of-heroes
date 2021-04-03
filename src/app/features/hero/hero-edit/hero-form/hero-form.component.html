@@ -169,13 +169,13 @@
         <div [formGroupName]="i" class="flex-grow">
           <mat-form-field class="w-full">
             <mat-label>Ability</mat-label>
-            <input formControlName="name" matInput type="text" required maxlength="50" />
+            <input formControlName="name" matInput type="text" [required]="!last" maxlength="50" />
             <mat-error *ngIf="group.get('name')?.hasError('required')">Please enter an ability name.</mat-error>
             <mat-error *ngIf="group.get('name')?.hasError('minlength')">Please enter at least 3 characters.</mat-error>
           </mat-form-field>
           <mat-form-field class="w-full">
             <mat-label>Description</mat-label>
-            <textarea formControlName="description" matInput type="text" required maxlength="255"></textarea>
+            <textarea formControlName="description" matInput type="text" [required]="!last" maxlength="255"></textarea>
             <mat-error *ngIf="group.get('name')?.hasError('required')">Please enter an ability description.</mat-error>
             <mat-error *ngIf="group.get('description')?.hasError('minlength')"
               >Please enter at least 50 characters.</mat-error

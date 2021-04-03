@@ -1,14 +1,14 @@
 export interface HeroForm {
-  readonly abilities?: HeroFormAbility[];
+  readonly abilities: HeroFormAbility[];
   readonly about: string;
-  readonly alterEgo?: HeroFormAlterEgo;
+  readonly alterEgo: HeroFormAlterEgo;
   readonly name: string;
   readonly stats: HeroFormStats;
 }
 
 export interface HeroFormAlterEgo {
-  readonly firstName: string;
-  readonly lastName: string;
+  readonly firstName: string | null;
+  readonly lastName: string | null;
 }
 
 export interface HeroFormAbility {
