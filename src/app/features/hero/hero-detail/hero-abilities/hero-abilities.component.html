@@ -19,7 +19,10 @@
           </div>
         </div>
         <div class="sm:w-1/2"></div>
-        <div [style.background-image]="'url(' + item?.image + ')'" class="sm:w-1/2 bg-top bg-cover"></div>
+        <div
+          [style.background-image]="item?.image ? 'url(' + item.image + ')' : 'none'"
+          class="sm:w-1/2 bg-top bg-cover"
+        ></div>
       </div>
     </div>
   </mat-tab>
