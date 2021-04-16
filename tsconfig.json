@@ -21,10 +21,9 @@
       "lodash/*": ["node_modules/@types/lodash-es/*"],
       "~environment": ["src/environments/environment"],
       "~app": ["src/app"],
-      "~features/*": ["src/app/features/*"],
+      "~core/*": ["src/app/core/*"],
       "~layouts/*": ["src/app/layouts/*"],
       "~shared/*": ["src/app/shared/*"],
-      "~shell": ["src/app/layouts/shell"],
       "~store/*": ["src/app/store/*"]
     }
   },

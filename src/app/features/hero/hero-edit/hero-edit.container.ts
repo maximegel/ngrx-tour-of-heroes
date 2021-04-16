@@ -49,9 +49,8 @@ export class HeroEditContainer implements OnInit {
         switchMapTo(this.store.select(HeroSelectors.loaded)),
         filter(loaded => loaded),
         switchMapTo(this.store.select(HeroSelectors.selected)),
-        map(hero => hero?.slug),
         take(1),
       )
-      .subscribe(slug => slug && this.router.navigateByUrl(appUrls.hero.detail(slug)));
+      .subscribe({ next: hero => hero && this.router.navigateByUrl(appUrls.hero.detail(hero)) });
   }
 }

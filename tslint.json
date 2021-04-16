@@ -7,7 +7,7 @@
     },
     "array-type": false,
     "arrow-return-shorthand": true,
-    "deprecation": true,
+    "deprecation": false,
     "import-blacklist": [true, "rxjs/Rx", "lodash", ["^lodash\\-es"]],
     "interface-over-type-literal": true,
     "interface-name": [true, "never-prefix"],

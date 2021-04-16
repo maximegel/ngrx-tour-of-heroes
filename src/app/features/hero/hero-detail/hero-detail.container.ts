@@ -18,23 +18,25 @@ import { HeroHeader } from './hero-header/hero-header.model';
 export class HeroDetailContainer {
   abilities$: Observable<HeroAbilities>;
   connections$: Observable<HeroConnections>;
+  error$: Observable<Error | null>;
   header$: Observable<HeroHeader>;
   stats$: Observable<Hero['stats']>;
 
   constructor(private store: Store<HeroSlice>, private router: Router) {
-    const selected$ = store.select(HeroSelectors.selected);
-    this.header$ = selected$.pipe(map(hero => ({ ...hero, alterEgo: hero?.alterEgo?.displayName })));
-    this.stats$ = store.select(HeroSelectors.selected).pipe(map(hero => hero?.stats));
-    this.abilities$ = store.select(HeroSelectors.selected).pipe(map(hero => hero?.abilities));
-    this.connections$ = selected$.pipe(
+    const hero$ = store.select(HeroSelectors.selected);
+    this.header$ = hero$.pipe(map(hero => ({ ...hero, alterEgo: hero?.alterEgo?.displayName })));
+    this.stats$ = hero$.pipe(map(hero => hero?.stats));
+    this.abilities$ = hero$.pipe(map(hero => hero?.abilities));
+    this.connections$ = hero$.pipe(
       map(hero => hero?.connections?.map(conn => ({ ...conn, alterEgo: conn.alterEgo?.displayName }))),
     );
+    this.error$ = store.select(HeroSelectors.error);
   }
 
   onEdit(): void {
     this.store
       .select(HeroSelectors.selected)
       .pipe(take(1))
-      .subscribe(hero => hero?.slug && this.router.navigateByUrl(appUrls.hero.edit(hero.slug)));
+      .subscribe({ next: hero => hero && this.router.navigateByUrl(appUrls.hero.edit(hero)) });
   }
 }

@@ -3,7 +3,7 @@ import { Hero } from './hero.entity';
 
 const captainAmerica: Hero = {
   id: uniqueId(),
-  slug: 'captain-america-steve-rogers',
+  slug: 'captain-america',
   name: 'Captain America',
   avatar: 'https://terrigen-cdn-dev.marvel.com/content/prod/1x/003cap_ons_crd_03.jpg',
   thumbnail: 'https://terrigen-cdn-dev.marvel.com/content/prod/1x/003cap_ons_crd_03.jpg',
@@ -37,7 +37,7 @@ const captainAmerica: Hero = {
 };
 const ironMan: Hero = {
   id: uniqueId(),
-  slug: 'iron-man-tony-stark',
+  slug: 'iron-man',
   name: 'Iron man',
   avatar: 'https://terrigen-cdn-dev.marvel.com/content/prod/1x/002irm_ons_crd_03.jpg',
   thumbnail: 'https://terrigen-cdn-dev.marvel.com/content/prod/1x/002irm_ons_crd_03.jpg',

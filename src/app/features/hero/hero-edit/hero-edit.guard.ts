@@ -11,7 +11,7 @@ export class HeroEditGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     const { slug } = route.params;
-    this.store.dispatch(HeroActions.loadOne({ payload: { slug } }));
+    if (slug) this.store.dispatch(HeroActions.loadOne({ payload: { slug } }));
     return this.store.select(HeroSelectors.loaded).pipe(filter(loaded => loaded));
   }
 }

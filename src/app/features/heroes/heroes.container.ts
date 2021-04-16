@@ -34,10 +34,10 @@ export class HeroesContainer {
   onDelete(hero: HeroTableRow): void {}
 
   onDetail(hero: HeroTableRow): void {
-    this.router.navigateByUrl(appUrls.hero.detail(hero.slug));
+    this.router.navigateByUrl(appUrls.hero.detail(hero));
   }
 
   onEdit(hero: HeroTableRow): void {
-    this.router.navigateByUrl(appUrls.hero.edit(hero.slug));
+    this.router.navigateByUrl(appUrls.hero.edit(hero));
   }
 }

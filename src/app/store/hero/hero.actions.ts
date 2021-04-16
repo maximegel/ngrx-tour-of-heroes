@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { serializeError } from 'serialize-error';
 import { Hero, HeroAlterEgo } from './hero.entity';
 
 export const create = createAction('[Heroes USR] Create', props<{ payload: CreateHero }>());
@@ -23,6 +24,8 @@ export const loadManyFailure = createAction('[Heroes API] LoadMany Failure', pro
 export const loadManySuccess = createAction('[Heroes API] LoadMany Success', props<{ payload: Hero[] }>());
 
 export const loadOne = createAction('[Heroes URL] LoadOne', props<{ payload: LoadOneHero }>());
-export const loadOneFailure = createAction('[Heroes API] LoadOne Failure', props<{ error: any }>());
+export const loadOneFailure = createAction('[Heroes API] LoadOne Failure', (args: { error: Error }) => ({
+  error: serializeError(args.error),
+}));
 export const loadOneSuccess = createAction('[Heroes API] LoadOne Success', props<{ payload: Hero }>());
 export type LoadOneHero = Partial<Pick<Hero, 'id' | 'slug'>>;

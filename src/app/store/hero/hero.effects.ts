@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, concatMap, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { catchError, concatMap, exhaustMap, map, mergeMap } from 'rxjs/operators';
 import {
   create,
   createFailure,
@@ -23,34 +23,45 @@ export class HeroEffects {
   create$ = createEffect(() =>
     this.actions$.pipe(
       ofType(create),
-      mergeMap(({ payload }) => this.service.create(payload)),
-      map(response => createSuccess({ payload: response })),
-      catchError(error => of(createFailure(error))),
+      mergeMap(({ payload }) =>
+        this.service.create(payload).pipe(
+          map(response => createSuccess({ payload: response })),
+          catchError(error => of(createFailure({ error }))),
+        ),
+      ),
     ),
   );
   edit$ = createEffect(() =>
     this.actions$.pipe(
       ofType(edit),
-      concatMap(({ payload }) => this.service.edit(payload)),
-      map(response => editSuccess({ payload: response })),
-      tap(a => console.log(a)),
-      catchError(error => of(editFailure(error))),
+      concatMap(({ payload }) =>
+        this.service.edit(payload).pipe(
+          map(response => editSuccess({ payload: response })),
+          catchError(error => of(editFailure({ error }))),
+        ),
+      ),
     ),
   );
   loadMany$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadMany),
-      switchMap(() => this.service.list()),
-      map(payload => loadManySuccess({ payload })),
-      catchError(error => of(loadManyFailure({ error }))),
+      exhaustMap(() =>
+        this.service.list().pipe(
+          map(response => loadManySuccess({ payload: response })),
+          catchError(error => of(loadManyFailure({ error }))),
+        ),
+      ),
     ),
   );
   loadOne$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadOne),
-      switchMap(({ payload }) => this.service.find(payload)),
-      map(payload => loadOneSuccess({ payload })),
-      catchError(error => of(loadOneFailure({ error }))),
+      exhaustMap(({ payload }) =>
+        this.service.find(payload).pipe(
+          map(response => loadOneSuccess({ payload: response })),
+          catchError(error => of(loadOneFailure({ error }))),
+        ),
+      ),
     ),
   );
 
